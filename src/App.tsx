@@ -5,6 +5,8 @@ import {Body} from "./site/Body";
 import {Footer} from "./site/Footer";
 import {NewComponent} from "./map/NewComponent";
 import {TopCars} from "./map/TopCars";
+import {Button} from "./components/Button";
+import {Money} from "./map/Money";
 
 function App() {
 
@@ -22,17 +24,62 @@ function App() {
             {id: 11, name: "Christopher", age: 100},
         ]
     )
-
     const topCars = [
-        {manufacturer:'BMW', model:'m5cs'},
-        {manufacturer:'Mercedes', model:'e63s'},
-        {manufacturer:'Audi', model:'rs6'}
+        {manufacturer: 'BMW', model: 'm5cs'},
+        {manufacturer: 'Mercedes', model: 'e63s'},
+        {manufacturer: 'Audi', model: 'rs6'}
     ]
+
+
+    const button1Foo = (subscriber: string, age: number, address: string) => {
+        console.log(subscriber, age, address)
+    }
+    const button2Foo = (subscriber: string) => {
+        console.log(subscriber)
+    }
+    const button3Foo = (message: string) => {
+        console.log(message)
+    }
+
+    let [a, setA] = useState(1)
+
+    const onClickHandler1 = () => {
+        setA(++a);
+        console.log(a);
+    }
+    const onClickHandler2 = () => {
+        setA(a - a);
+        console.log(a);
+    }
+
+    const [money, setMoney] = useState([
+        {banknotes: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknotes: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknotes: 'RUBLS', value: 100, number: ' w1234567890'},
+        {banknotes: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknotes: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknotes: 'RUBLS', value: 100, number: ' r1234567890'},
+        {banknotes: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknotes: 'RUBLS', value: 50, number: ' v1234567890'},
+    ])
 
     return (
         <>
-            <TopCars topCars = {topCars}/>
-            <NewComponent students = {students}/>
+
+            <h1>{a}</h1>
+            <button onClick={onClickHandler1}>number</button>
+            <button onClick={onClickHandler2}>0</button>
+
+
+            <Money  money={money}/>
+            <Button name={'YouTubeChannel-1'}
+                    callback={() => button1Foo('I am Alex', 36, 'Meleuz')}/>
+            <Button name={'YouTubeChannel-2'}
+                    callback={() => button2Foo('I am Alex')}/>
+            <Button name={'Stupid button'}
+                    callback={() => button3Foo('I am stupid BUTTON!')}/>
+            <TopCars topCars={topCars}/>
+            <NewComponent students={students}/>
             <Header titleForHeader={'New Header'}/>
             <Body titleForBody={'New Body'}/>
             <Footer titleForFooter={'New Footer'}/>
